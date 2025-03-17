@@ -1,7 +1,7 @@
 ﻿using iShape.Geometry.Container;
 using System.Collections.Generic;
 using iShape.Geometry;
-using NUnit.Framework;
+using System;
 using UnityEngine;
 
 namespace iShape.Triangulation.Extension
@@ -20,7 +20,9 @@ namespace iShape.Triangulation.Extension
         /// </summary>
         public static ValidationResult GetValidationResult(PlainShape shape)
         {
-            var validationResult = IsOverlappingVertices(shape) || IsCounterClockwise(shape) ? ValidationResult.InValid : ValidationResult.Valid;
+            var validationResult = IsOverlappingVertices(shape) || 
+                                   IsCounterClockwise(shape) ||
+                                   IsInvalidAngle(shape)? ValidationResult.InValid : ValidationResult.Valid;
             
             return validationResult;
         }
@@ -51,10 +53,10 @@ namespace iShape.Triangulation.Extension
         /// <summary>
         /// 頂点座標が反時計回りかどうかを判定する関数
         /// </summary>
+        /// /// <returns>頂点座標が反時計周りかどうか</returns>
         private static bool IsCounterClockwise(PlainShape shape)
-        { 
-            var iGeom = IntGeom.DefGeom;
-            var normal = NormalVectorFromShape(shape:shape, iGeom:iGeom);
+        {
+            var normal = NormalVectorFromShape(shape:shape);
             var normalXY = new Vector3(0, 0, -1).normalized; //2つのベクトルの内積が-1の時，反時計まわり
             var isCounterClockwise = (Vector3.Dot(normal, normalXY) <= -1);
             
@@ -62,13 +64,29 @@ namespace iShape.Triangulation.Extension
             
             return isCounterClockwise;
         }
+
+        /// <summary>
+        /// shapeのXZ平面に対する角度がXY平面上(2D上)でメッシュ生成することのできない角度(無効な角度)かどうかを判定する関数
+        /// </summary>
+        /// <param name="shape"></param>
+        /// <returns>shapeのXZ平面に対する角度が2度以下または178以上かどうか</returns>
+        private static bool IsInvalidAngle(PlainShape shape)
+        {
+            var normal = NormalVectorFromShape(shape);
+            var angle =  Vector3.Angle(normal,Vector3.up);
+            var isInvalidAngle = (Math.Abs(angle) <= 2 || Math.Abs(angle) >= 178);
+            
+            if (isInvalidAngle) Debug.LogWarning("メッシュのXZ平面に対する角度が無効です");
+
+            return isInvalidAngle;
+        }
         
         // 検出可能面の法線ベクトルを求める関数
-        public static Vector3 NormalVectorFromShape(PlainShape shape, IntGeom iGeom)
+        private static Vector3 NormalVectorFromShape(PlainShape shape)
         {
             var n = shape.layouts[0].length; // hullの頂点数
-            Debug.Log(n);
             var normal = Vector3.zero;
+            var iGeom = IntGeom.DefGeom;
 
             for (var i = 0; i < n; i++)
             {
