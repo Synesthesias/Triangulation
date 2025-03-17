@@ -1,6 +1,7 @@
 ﻿using iShape.Triangulation.Util;
 using iShape.Geometry;
 using iShape.Geometry.Container;
+using iShape.Triangulation.Extension;
 using Unity.Collections;
 using UnityEngine;
 
@@ -51,7 +52,15 @@ namespace iShape.Triangulation.Shape.Delaunay {
             return triangles;
         }
         
-        public static Delaunay Delaunay(this PlainShape shape, long maxEdge, NativeArray<IntVector> extraPoints, Allocator allocator) {
+        public static Delaunay Delaunay(this PlainShape shape, long maxEdge, NativeArray<IntVector> extraPoints, Allocator allocator)
+        {
+            Delaunay delaunay;
+            if (ShapeValidationExt.GetValidationResult(shape) == ValidationResult.InValid)
+            {
+                delaunay = new Delaunay();
+                return delaunay;
+            }
+            
             var layout = shape.Split(maxEdge, extraPoints, Allocator.Temp);
 
             int holesCount = shape.layouts.Length;
@@ -72,7 +81,6 @@ namespace iShape.Triangulation.Shape.Delaunay {
 
             sliceBuffer.Dispose();
 
-            Delaunay delaunay;
             if (extraPoints.Length == 0 && maxEdge == 0) {
                 delaunay = new Delaunay(shape.points, triangles, allocator);
             } else {

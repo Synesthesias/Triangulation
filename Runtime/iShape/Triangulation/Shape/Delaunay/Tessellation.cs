@@ -119,7 +119,10 @@ namespace iShape.Triangulation.Shape.Delaunay {
             return delaunay;
         }
 
-        public static void Tessellate(ref this Delaunay self, IntGeom intGeom, float maxArea) {
+        public static void Tessellate(ref this Delaunay self, IntGeom intGeom, float maxArea)
+        {
+            if (self.points.Count == 0) return;
+            
             var validator = new Validator(intGeom, maxArea);
             var unprocessed = new IndexBuffer(self.triangles.Count, Allocator.Temp);
             
