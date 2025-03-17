@@ -1,8 +1,7 @@
-﻿using System.Numerics;
-using Unity.Collections;
+﻿using Unity.Collections;
 using iShape.Geometry;
 using iShape.Collections;
-using Vector3 = UnityEngine.Vector3;
+using UnityEngine;
 
 namespace iShape.Triangulation.Shape.Delaunay {
 
