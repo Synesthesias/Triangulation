@@ -13,7 +13,7 @@ namespace iShape.Triangulation.Extension
         Valid,
     }
     
-    public static class ShapeValidationExt
+    public static class ShapeValidatorExt
     {
         /// <summary>
         /// 頂点のバリデーション結果を返す関数

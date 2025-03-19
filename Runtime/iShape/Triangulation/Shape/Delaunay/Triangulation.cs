@@ -55,7 +55,7 @@ namespace iShape.Triangulation.Shape.Delaunay {
         public static Delaunay Delaunay(this PlainShape shape, long maxEdge, NativeArray<IntVector> extraPoints, Allocator allocator)
         {
             Delaunay delaunay;
-            if (ShapeValidationExt.GetValidationResult(shape) == ValidationResult.InValid)
+            if (ShapeValidatorExt.GetValidationResult(shape) == ValidationResult.InValid)
             {
                 delaunay = new Delaunay();
                 return delaunay;
