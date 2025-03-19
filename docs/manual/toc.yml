@@ -1,4 +1,7 @@
-- name: Introduction
-  href: introduction.md
-- name: Getting Started
-  href: getting-started.md
+- name: Triangulation
+  href: ../index.md
+- name: 利用を開始する
+  items:
+    - name: デバッグ方法
+      href: debugMan.md
+      

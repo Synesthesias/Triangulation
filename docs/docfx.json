@@ -1,18 +1,21 @@
 {
   "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
   "build": {
+    "globalMetadata": {
+      "_appName": "Triangulation",
+      "_appTitle": "Triangulation",
+      "_enableSearch": true
+    },
     "content": [
       {
         "files": [
           "**/*.{md,yml}"
-        ],
-        "exclude": [
-          "_site/**"
         ]
       },
       {
+        "src": "manual",
         "files": [
-          "manual/**/*.md"
+          "manual/*.md"
         ],
         "dest": "manual"
       }
@@ -24,16 +27,6 @@
         ]
       }
     ],
-    "output": "_site",
-    "template": [
-      "default",
-      "modern"
-    ],
-    "globalMetadata": {
-      "_appName": "Triangulation",
-      "_appTitle": "Triangulation",
-      "_enableSearch": true,
-      "pdf": false
-    }
+    "dest": "../docs/_site"
   }
 }
