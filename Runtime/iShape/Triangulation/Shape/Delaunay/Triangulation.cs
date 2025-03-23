@@ -2,6 +2,7 @@
 using iShape.Geometry;
 using iShape.Geometry.Container;
 using iShape.Triangulation.Extension;
+using iShape.Triangulation.Validation;
 using Unity.Collections;
 using UnityEngine;
 
@@ -55,10 +56,10 @@ namespace iShape.Triangulation.Shape.Delaunay {
         public static Delaunay Delaunay(this PlainShape shape, long maxEdge, NativeArray<IntVector> extraPoints, Allocator allocator)
         {
             Delaunay delaunay;
-            if (ShapeValidatorExt.GetValidationResult(shape) == ValidationResult.InValid)
+            var validationResult = ShapeValidatorExt.GetValidationResult(shape);
+            if (validationResult != ValidationResult.Valid)
             {
-                delaunay = new Delaunay();
-                return delaunay;
+                throw new BuildDelaunayException(ValidationContext.GetValidationContext(validationResult));
             }
             
             var layout = shape.Split(maxEdge, extraPoints, Allocator.Temp);

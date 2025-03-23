@@ -1,30 +1,25 @@
 ﻿using iShape.Geometry.Container;
 using System.Collections.Generic;
 using iShape.Geometry;
+using iShape.Triangulation.Validation;
 using System;
 using UnityEngine;
 
 namespace iShape.Triangulation.Extension
-{
-    public enum ValidationResult
-    {
-        None,
-        InValid,
-        Valid,
-    }
-    
+{   
     public static class ShapeValidatorExt
     {
         /// <summary>
-        /// 頂点のバリデーション結果を返す関数
+        /// バリデーションの結果を返す関数
         /// </summary>
+        /// <param name="shape">2次元同一平面上の頂点群</param>
+        /// <returns>バリデーションの結果</returns>
         public static ValidationResult GetValidationResult(PlainShape shape)
         {
-            var validationResult = IsOverlappingVertices(shape) || 
-                                   IsCounterClockwise(shape) ||
-                                   IsInvalidAngle(shape)? ValidationResult.InValid : ValidationResult.Valid;
+            if (IsOverlappingVertices(shape)) return ValidationResult.OverLap;
+            else if (IsCounterClockwise(shape)) return ValidationResult.CounterClockwise;
             
-            return validationResult;
+            return ValidationResult.Valid;
         }
         
         /// <summary>
@@ -45,8 +40,6 @@ namespace iShape.Triangulation.Extension
                 break;
             }
             
-            if (overlap) Debug.LogWarning("頂点が重複しています");
-            
             return overlap;
         }
 
@@ -59,8 +52,6 @@ namespace iShape.Triangulation.Extension
             var normal = NormalVectorFromShape(shape:shape);
             var normalXY = new Vector3(0, 0, -1).normalized; //2つのベクトルの内積が-1の時，反時計まわり
             var isCounterClockwise = (Vector3.Dot(normal, normalXY) <= -1);
-            
-            if (isCounterClockwise) Debug.LogWarning("頂点が反時計周りです");
             
             return isCounterClockwise;
         }
@@ -75,8 +66,6 @@ namespace iShape.Triangulation.Extension
             var normal = NormalVectorFromShape(shape);
             var angle =  Vector3.Angle(normal,Vector3.up);
             var isInvalidAngle = (Math.Abs(angle) <= 2 || Math.Abs(angle) >= 178);
-            
-            if (isInvalidAngle) Debug.LogWarning("メッシュのXZ平面に対する角度が無効です");
 
             return isInvalidAngle;
         }
