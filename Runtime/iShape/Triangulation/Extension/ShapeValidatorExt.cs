@@ -10,7 +10,7 @@ namespace iShape.Triangulation.Extension
     public static class ShapeValidatorExt
     {
         /// <summary>
-        /// バリデーションの結果を返す関数
+        /// 頂点のバリデーションの結果を返す関数
         /// </summary>
         /// <param name="shape">2次元同一平面上の頂点群</param>
         /// <returns>バリデーションの結果</returns>
@@ -68,9 +68,13 @@ namespace iShape.Triangulation.Extension
             var isInvalidAngle = (Math.Abs(angle) <= 2 || Math.Abs(angle) >= 178);
 
             return isInvalidAngle;
-        }
+        } 
         
-        // 検出可能面の法線ベクトルを求める関数
+        /// <summary>
+        // /// 2次元同一平面上の頂点群から法線ベクトルを計算する関数
+        // /// </summary>
+        // /// <param name="shape">2次元同一平面上の頂点群</param>
+        // /// <returns>法線ベクトル(Vector3)</returns>
         private static Vector3 NormalVectorFromShape(PlainShape shape)
         {
             var n = shape.layouts[0].length; // hullの頂点数
