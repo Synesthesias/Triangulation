@@ -39,12 +39,17 @@ namespace iShape.Triangulation.Runtime
                 vertices: hull,
                 rotationAxisX: rotationAxisX,
                 rotationAxisY: rotationAxisY);
+
+            var rotatedHolesVertices = holes?.Select(hole => VectorCalculator.GetRotatedVertices(
+                vertices: hole,
+                rotationAxisX: rotationAxisX,
+                rotationAxisY: rotationAxisY)).ToArray();
             
             var iGeom = IntGeom.DefGeom;
             await UniTask.DelayFrame(1, cancellationToken: cancellationToken);
 
             var vector2Hull = VectorCalculator.GetHullVertices2d(rotatedHullVertices);
-            var vector2Holes = VectorCalculator.GetHolesVertices2d(holes);
+            var vector2Holes = VectorCalculator.GetHolesVertices2d(rotatedHolesVertices);
             await UniTask.DelayFrame(2, cancellationToken: cancellationToken);
             
             // TODO:Geometryの方にあるPlainShapeを編集して，以下の引数でPlainShapeのインスタンスを作成する
