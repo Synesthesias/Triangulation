@@ -1,6 +1,6 @@
 namespace iShape.Triangulation.Validation
 {
-    public static class ValidationContext
+    public static class ValidationResultMessage
     {
         /// <summary>
         /// 指定されたバリデーション結果に対応する説明文を取得

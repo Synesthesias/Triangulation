@@ -59,7 +59,7 @@ namespace iShape.Triangulation.Shape.Delaunay {
             var validationResult = ShapeValidatorExt.GetValidationResult(shape);
             if (validationResult != ValidationResult.Valid)
             {
-                throw new BuildDelaunayException(ValidationContext.GetValidationContext(validationResult));
+                throw new BuildDelaunayException(ValidationResultMessage.GetValidationContext(validationResult));
             }
             
             var layout = shape.Split(maxEdge, extraPoints, Allocator.Temp);
