@@ -18,6 +18,7 @@
 ### 頂点座標が3次元の場合
 1. 空オブジェクトを作成し、MeshFilterとMeshRendererをアタッチする
 2. 以下のようにコードを作成し、先程作ったオブジェクトにアタッチして実行
+3. Unityシーン上にTessellateの結果が可視化される
 ```csharp
 using Cysharp.Threading.Tasks;
 using System.Threading;
