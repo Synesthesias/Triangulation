@@ -5,6 +5,7 @@ using iShape.Triangulation.Shape.Delaunay;
 using Unity.Mathematics;
 using UnityEngine;
 using System.Linq;
+using System;
 
 namespace iShape.Triangulation.Runtime
 {
@@ -26,19 +27,25 @@ namespace iShape.Triangulation.Runtime
                 return null;
             }
             
+            // 各頂点のオフセットを調整
+            var origin = hull[0];
+            hull = VectorCalculator.GetAdjustedHull(
+                hull: hull, 
+                origin: origin);
+            holes = VectorCalculator.GetAdjustedHoles(
+                holes: holes,
+                origin: origin);
+            
             // メッシュを生成する用の頂点座標を設定
-			var rotationAxisX = VectorCalculator.GetRotationAxisX(hull);
-            var rotationAxisY = VectorCalculator.GetRotationAxisY(hull);
+            var rotation = VectorCalculator.GetQuaternionFromVertices(hull);
 
             var rotatedHullVertices = VectorCalculator.GetRotatedVertices(
-                vertices: hull,
-                rotationAxisX: rotationAxisX,
-                rotationAxisY: rotationAxisY);
-
+                vertices: hull, 
+                rotation: rotation);
+        
             var rotatedHolesVertices = holes?.Select(hole => VectorCalculator.GetRotatedVertices(
-                vertices: hole,
-                rotationAxisX: rotationAxisX,
-                rotationAxisY: rotationAxisY)).ToArray();
+                vertices: hole, 
+                rotation: rotation)).ToArray();
             
             var iGeom = IntGeom.DefGeom;
 
@@ -118,8 +125,7 @@ namespace iShape.Triangulation.Runtime
 
             // verticesに渡す頂点を作成
             var invertRotationMatrix = VectorCalculator.GetInvertRotationMatrix(
-                rotationAxisX: rotationAxisX,
-                rotationAxisY: rotationAxisY);
+                rotation: rotation);
 
             var restoredVertices = VectorCalculator.GetRestoredVertices(
                 mesh.vertices,

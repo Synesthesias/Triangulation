@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using iShape.Geometry.Container;
 using iShape.Geometry;
 using UnityEngine;
@@ -23,19 +22,39 @@ namespace iShape.Triangulation.Runtime
         {
             return rotationMatrix.MultiplyPoint3x4(vertex);
         }
+        
+        /// <summary>
+		/// 最初の頂点を(0,0,0)とした相対座標に変更する->メッシュ生成時に最初の頂点をオブジェクトのpositionに設定
+        /// </summary>
+        /// <param name="hull">hullの頂点群</param>
+        /// <param name="origin">最初の頂点座標(原点)</param>>
+        /// <returns>調整後のhull</returns>
+        public static Vector3[] GetAdjustedHull(Vector3[] hull, Vector3 origin)
+        {
+            return hull.Select(vertex => vertex - origin).ToArray();
+        }
+        
+        /// <summary>
+		/// 最初の頂点を(0,0,0)とした相対座標に変更する->メッシュ生成時に最初の頂点をオブジェクトのpositionに設定
+        /// </summary>
+        /// <param name="holes">holesの頂点群</param>
+        /// <param name="origin">最初の頂点座標(原点)</param>>
+        /// <returns>調整後のHoles</returns>
+        public static Vector3[][] GetAdjustedHoles(Vector3[][] holes, Vector3 origin)
+        {
+            return holes?
+                .Select(hole => hole?.Select(vertex => vertex - origin).ToArray() ?? Array.Empty<Vector3>())
+                .ToArray();
+        }
 
         /// <summary>
         /// 指定した角度の逆回転行列を取得
         /// </summary>
-        /// <param name="rotationAxisX">X軸回転角度（度単位）</param>
-		/// <param name="rotationAxisY">Y軸回転角度（度単位）</param>
+        /// <param name="rotation">Quaternion</param>
         /// <returns>逆回転行列</returns>
-        public static Matrix4x4 GetInvertRotationMatrix(float rotationAxisX, float rotationAxisY)
+        public static Matrix4x4 GetInvertRotationMatrix(Quaternion rotation)
         {
-            // var rotationAxis = Vector3.up;
-            // var rotationQuaternion = Quaternion.AngleAxis(rotationAxisY, rotationAxis);
-            // var rotationQuaternion = Quaternion.Euler(rotationAngleX, rotationAngleY, 0);
-            var rotationMatrix = Matrix4x4.Rotate(Quaternion.Euler(rotationAxisX, rotationAxisY, 0));
+            var rotationMatrix = Matrix4x4.Rotate(rotation);
             return rotationMatrix.inverse;
         }
 
@@ -51,21 +70,22 @@ namespace iShape.Triangulation.Runtime
         }
 
         /// <summary>
-        /// 3Dの頂点配列から2Dの頂点配列を取得
+        /// Vector3の頂点配列からVector2の頂点配列を取得(Hull版)
         /// (x,y,z) -> (x,y,0)
         /// </summary>
-        /// <param name="hullVertices">3D空間上の頂点配列</param>
-        /// <returns>2D座標に変換された頂点配列</returns>
+        /// <param name="hullVertices">Vector3の頂点配列</param>
+        /// <returns>Vector2に変換された頂点配列</returns>
         public static Vector2[] GetHullVertices2d(Vector3[] hullVertices)
         {
             return hullVertices.Select(vertex => new Vector2(vertex.x, vertex.y)).ToArray();
         }
 
         /// <summary>
-        /// 3D空間上の穴の頂点配列を2D座標に変換する。
+        /// Vector3の頂点配列からVector2の頂点配列を取得(Holes版)
+		/// (x,y,z) -> (x,y,0)
         /// </summary>
-        /// <param name="holesVertices">3D空間上の穴の頂点リストの配列</param>
-        /// <returns>2D座標に変換された穴の頂点リストの配列</returns>
+        /// <param name="holesVertices">Vector3の多次元配列/param>
+        /// <returns>Vector2に変換された穴の頂点リストの配列</returns>
         public static Vector2[][] GetHolesVertices2d(Vector3[][] holesVertices)
         {
             if (holesVertices == null || holesVertices.Length == 0)
@@ -77,60 +97,37 @@ namespace iShape.Triangulation.Runtime
                 .Select(hole => hole?.Select(vertex => new Vector2(vertex.x, vertex.y)).ToArray() ?? Array.Empty<Vector2>())
                 .ToArray();
         }
-
-        /// <summary>
-        /// 3D頂点群をXY平面上に投影するために必要なY軸回転角度を計算する
-        /// </summary>
-        /// <param name="vertices">対象の頂点群。/param>
-        /// <returns>Y軸回転角度（度単位）</returns>
-        public static float GetRotationAxisY(Vector3[] vertices)
-        {
-            var normal = NormalVectorFrom3d(vertices);
-            var fromNormal = Vector3.ProjectOnPlane(normal, Vector3.up);
-
-            return Vector3.SignedAngle(fromNormal, Vector3.back, Vector3.up);
-        }
         
         /// <summary>
-        /// 3D頂点群をXY平面上に投影するために必要なX軸回転角度を計算する
+        /// 頂点群の法線ベクトルをVector3.backへ投影するのに必要なQuaternionを取得
         /// </summary>
-        /// <param name="vertices">対象の頂点群</param>
-        /// <returns>X軸回転角度（度単位）</returns>
-        public static float GetRotationAxisX(Vector3[] vertices)
+        /// <param name="vertices">頂点群</param>
+        /// <returns>回転量(Quaternion)</returns>
+        public static Quaternion GetQuaternionFromVertices(Vector3[] vertices)
         {
             var normal = NormalVectorFrom3d(vertices);
-            var fromNormal = Vector3.ProjectOnPlane(normal, Vector3.right);
-            var angle = Vector3.SignedAngle(fromNormal, Vector3.back, Vector3.right);
 
-            if (angle >= -90 && angle <= 90)
-            {
-                return angle;
-            }
-            else
-            {
-                return angle < -90 ? -(180 + angle) : 180 - angle;
-            }
+            return Quaternion.FromToRotation(normal, Vector3.back);
         }
 
         /// <summary>
-        /// 指定した回転角度を適用して頂点群を回転させる
+        /// 指定したQuaternionを適用して頂点群を回転させる
         /// </summary>
         /// <param name="vertices">回転対象の頂点群</param>
-        /// <param name="rotationAxisY">X軸回転角度（度単位）</param>
-		/// <param name="rotationAxisY">Y軸回転角度（度単位）</param>
+        /// <param name="rotation">Quaternion</param>
         /// <returns>回転後の頂点群</returns>
-        public static Vector3[] GetRotatedVertices(Vector3[] vertices, float rotationAxisX, float rotationAxisY)
+        public static Vector3[] GetRotatedVertices(Vector3[] vertices, Quaternion rotation)
         {
-            var rotationMatrix = Matrix4x4.Rotate(Quaternion.Euler(rotationAxisX, rotationAxisY, 0));
+            var rotationMatrix = Matrix4x4.Rotate(rotation);
             return vertices.Select(vertex => RotateByMatrix(vertex, rotationMatrix)).ToArray();
         }
         
         /// <summary>
-        /// 3D空間の頂点群から法線ベクトルを計算する。
+        /// Vector3の頂点群から法線ベクトルを計算する。
         /// </summary>
         /// <param name="vertices">対象の頂点群。</param>
         /// <returns>計算された法線ベクトル。</returns>
-        public static Vector3 NormalVectorFrom3d(Vector3[] vertices)
+        private static Vector3 NormalVectorFrom3d(Vector3[] vertices)
         {
             var normal = Vector3.zero;
 
@@ -145,7 +142,7 @@ namespace iShape.Triangulation.Runtime
         }
 
         /// <summary>
-        /// 2D空間の頂点群から法線ベクトルを計算する。
+        /// Vector2の頂点群から法線ベクトルを計算する。
         /// </summary>
         /// <param name="vertices">対象の頂点群。</param>
         /// <returns>計算された法線ベクトル。</returns>
