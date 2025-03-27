@@ -8,8 +8,6 @@
 
 4. Addボタンをクリック
 
-5. [UniTaskのREADME](https://github.com/Cysharp/UniTask#upm-package)を参考にUniTaskをインストール
-
 ※新規プロジェクトに導入する場合は以下のpackageも同様にインポートする
 - https://github.com/iShapeUnity/Geometry.git
 - https://github.com/iShapeUnity/Mesh2d.git
@@ -48,8 +46,6 @@ public class MeshView : MonoBehaviour
 3. 再び空オブジェクトを作成し、以下のスクリプトをアタッチ
 4. 2.で作成したPrefabをmeshViewTemplateにアタッチして実行
 ```csharp
-using Cysharp.Threading.Tasks;
-using System.Threading;
 using iShape.Triangulation.Runtime;
 using UnityEngine;
 
@@ -69,8 +65,6 @@ public class TestFromVertices3d : MonoBehaviour
 {
     [SerializeField]
     private MeshView meshViewTemplate;
-
-    private CancellationToken cancellationToken;
 
     private TestShape3d[] data3d = new TestShape3d[]
     {
@@ -100,25 +94,22 @@ public class TestFromVertices3d : MonoBehaviour
 
     private void Awake()
     {
-        cancellationToken = new CancellationToken();
-
-        CreateAsync(cancellationToken:cancellationToken);
+        CreateMeshes();
     }
     
     /// <summary>
     /// メッシュを生成する
     /// </summary>
-    private async UniTask CreateAsync(CancellationToken cancellationToken)
+    private void CreateMeshes()
     {
         for(int index = 0; index < data3d.Length; index++)
         {
-            var mesh = await CreateMeshAsync(
+            var mesh = CreateMesh(
                 hull: data3d[index].Hull,
-                holes: data3d[index].Holes,
-                cancellationToken: cancellationToken);
-
+                holes: data3d[index].Holes);
+        
             meshViewTemplate.MeshFilter.mesh = mesh;
-
+        
             var meshView = UnityEngine.Object.Instantiate(
                 meshViewTemplate,
                 data3d[index].Hull[0], // 最初の頂点をオブジェクトの原点として設定する
@@ -129,17 +120,15 @@ public class TestFromVertices3d : MonoBehaviour
     /// <summary>
     /// メッシュを生成する
     /// </summary>
-    private async UniTask<Mesh> CreateMeshAsync(
+    private Mesh CreateMesh(
         Vector3[] hull,
-        Vector3[][] holes,
-        CancellationToken cancellationToken)
+        Vector3[][] holes)
     {
         var shapeMeshCreator = new ShapeMeshCreatorExt();
     
-        var mesh = await shapeMeshCreator.CreateAsync(
+        var mesh = shapeMeshCreator.CreateMesh(
             hull: hull,
-            holes: holes,
-            cancellationToken: cancellationToken
+            holes: holes
         );
     
         mesh.RecalculateBounds();
