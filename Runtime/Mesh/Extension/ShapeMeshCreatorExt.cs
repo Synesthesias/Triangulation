@@ -45,7 +45,6 @@ namespace iShape.Triangulation.Runtime
             var vector2Hull = VectorCalculator.GetHullVertices2d(rotatedHullVertices);
             var vector2Holes = VectorCalculator.GetHolesVertices2d(rotatedHolesVertices);
             
-            // TODO:Geometryの方にあるPlainShapeを編集して，以下の引数でPlainShapeのインスタンスを作成する
             var plainShapeCreator = new PlainShapeCreator();
             var pShape = plainShapeCreator.CreatePlainShape(
                 hull: vector2Hull,

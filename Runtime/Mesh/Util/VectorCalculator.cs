@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using iShape.Geometry.Container;
+using iShape.Geometry;
 using UnityEngine;
 using System.Linq;
 
@@ -156,6 +158,36 @@ namespace iShape.Triangulation.Runtime
                 var edge1 = (Vector3)(vertices[(i + 1) % vertices.Length] - vertices[i]);
                 var edge2 = (Vector3)(vertices[(i + 2) % vertices.Length] - vertices[i]);
                 normal += Vector3.Cross(edge1, edge2);
+            }
+
+            return normal.normalized;
+        }
+        
+        /// <summary>
+        /// 2次元同一平面上の頂点群から法線ベクトルを計算する関数
+        /// </summary>
+        /// <param name="shape">2次元同一平面上の頂点群</param>
+        /// <returns>法線ベクトル(Vector3)</returns>
+        public static Vector3 NormalVectorFromShape(PlainShape shape)
+        {
+            var n = shape.layouts[0].length; // hullの頂点数
+            var normal = Vector3.zero;
+            var iGeom = IntGeom.DefGeom;
+
+            for (var i = 0; i < n; i++)
+            {
+                var p0 = shape.points[i];
+                var p1 = shape.points[(i + 1) % n];
+                var p2 = shape.points[(i + 2) % n];
+
+                var edge1 = iGeom.Float(p1 - p0);
+                var edge2 = iGeom.Float(p2 - p0);
+
+                var cross = Vector3.Cross(edge1, edge2);
+                if (cross.magnitude > 0)
+                {
+                    normal += cross;
+                }
             }
 
             return normal.normalized;
