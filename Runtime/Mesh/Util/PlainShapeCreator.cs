@@ -7,7 +7,7 @@ using UnityEngine;
 namespace iShape.Triangulation.Runtime
 {
     /// <summary>
-    /// GeometryのPlainShapeに移行予定(移行が完了したら削除)
+    /// hull(Vector2[])とholes(Vector2[][])からiShape.GeometryのPlainShapeを作成するクラス
     /// </summary>
     public class PlainShapeCreator
     {

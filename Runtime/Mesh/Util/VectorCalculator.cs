@@ -8,7 +8,7 @@ namespace iShape.Triangulation.Runtime
 {
     /// <summary>
     /// ベクトル計算を行うクラス
-    /// 回転行列の適用や法線ベクトルの計算、メッシュの中心座標の取得などを提供
+    /// 回転行列の適用や法線ベクトルの計算、XY平面投影時に必要な角度の計算などを提供
     /// </summary>
     public static class VectorCalculator
     {
