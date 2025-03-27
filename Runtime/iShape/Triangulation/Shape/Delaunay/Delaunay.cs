@@ -12,6 +12,9 @@ namespace iShape.Triangulation.Shape.Delaunay {
 
         public NativeArray<int> Indices(Allocator allocator) {
             int n = triangles.Count;
+
+            if (n == 0) return new NativeArray<int>(0, allocator);
+            
             var result = new NativeArray<int>(3 * n, allocator);
             int i = 0;
             int j = 0;
@@ -30,6 +33,9 @@ namespace iShape.Triangulation.Shape.Delaunay {
         
         public NativeArray<Vector3> Vertices(Allocator allocator, IntGeom intGeom, float z = 0) {
             int n = points.Count;
+            
+            if (n == 0) return new NativeArray<Vector3>(0, allocator);
+            
             var result = new NativeArray<Vector3>(n, allocator);
             for (int i = 0; i < n; ++i) {
                 var p = intGeom.Float(points[i]);
@@ -42,6 +48,12 @@ namespace iShape.Triangulation.Shape.Delaunay {
         public Delaunay(NativeArray<IntVector> points, NativeArray<Triangle> triangles, Allocator allocator) {
             this.points = new DynamicArray<IntVector>(points, allocator);
             this.triangles = new DynamicArray<Triangle>(triangles, allocator);
+        }
+
+        public Delaunay(Allocator allocator)
+        {
+            points = new DynamicArray<IntVector>(allocator);
+            triangles = new DynamicArray<Triangle>(allocator);
         }
 
         public void Build() {
