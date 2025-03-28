@@ -1,0 +1,8 @@
+- name: Triangulation
+  href: ../index.md
+- name: 利用を開始する
+  items:
+    - name: 動作確認
+      href: debugMan.md
+    - name: 使い方
+      href: howToUseMan.md

@@ -1,4 +1,7 @@
 # Triangulation [Port](https://github.com/iShape-Swift/iShapeTriangulation/)
+元のライブラリに入力データのバリデーションと、３次元頂点への対応を追加した実装です。
+
+---
 Complex polygon triangulation, tessellation and split into convex polygons. A fast O(n*log(n)) algorithm based on "Triangulation of monotone polygons". The result can be represented as a Delaunay triangulation.
 ## Delaunay triangulation
 <p align="center">

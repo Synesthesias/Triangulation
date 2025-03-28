@@ -1,0 +1,32 @@
+{
+  "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+  "build": {
+    "globalMetadata": {
+      "_appName": "Triangulation",
+      "_appTitle": "Triangulation",
+      "_enableSearch": true
+    },
+    "content": [
+      {
+        "files": [
+          "**/*.{md,yml}"
+        ]
+      },
+      {
+        "src": "manual",
+        "files": [
+          "manual/*.md"
+        ],
+        "dest": "manual"
+      }
+    ],
+    "resource": [
+      {
+        "files": [
+          "images/**"
+        ]
+      }
+    ],
+    "dest": "../docs/_site"
+  }
+}
