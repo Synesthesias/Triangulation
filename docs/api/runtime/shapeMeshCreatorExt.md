@@ -1,4 +1,4 @@
-# ShapeMeshCreatorExt
+# Class ShapeMeshCreatorExt
 3次元座標からTriangulationを行い、メッシュを生成するクラス
 
 ---

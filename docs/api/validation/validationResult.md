@@ -1,4 +1,4 @@
-# ValidationResult
+# Enum ValidationResult
 バリデーション結果を表すEnum
 
 ---

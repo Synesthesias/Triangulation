@@ -1,4 +1,4 @@
-# ValidationResultMessage
+# Class ValidationResultMessage
 指定されたバリデーション結果に対応する説明分を返却するクラス
 
 ---

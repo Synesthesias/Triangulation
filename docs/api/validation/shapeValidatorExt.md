@@ -1,4 +1,4 @@
-# ShapeValidatorExt
+# Class ShapeValidatorExt
 頂点のバリデーション結果を取得するクラス
 
 ---

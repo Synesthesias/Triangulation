@@ -1,4 +1,4 @@
-# BuildDelaunayException
+# Class BuildDelaunayException
 ドロネー図作成エラー
 
 ---

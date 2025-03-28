@@ -1,4 +1,4 @@
-# PlainShapeCreator
+# Class PlainShapeCreator
 hull(Vector2[])とholes(Vector2[][])からiShape.GeometryのPlainShapeを作成するクラス
 
 ---
