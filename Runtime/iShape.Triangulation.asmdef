@@ -2,9 +2,11 @@
     "name": "iShape.Triangulation",
     "rootNamespace": "",
     "references": [
+        "iShape.Mesh2d",
         "iShape.Geometry",
         "Unity.Collections",
-        "Unity.Mathematics"
+        "Unity.Mathematics",
+        "UniTask"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
