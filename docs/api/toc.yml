@@ -1,0 +1,20 @@
+- name: iShape.Triangulation.Validation
+  href: validation/validationApi.md
+  items:
+    - name: BuildDelaunayException
+      href: validation/buildDelaunayException.md
+    - name: ShapeValidatorExt
+      href: validation/shapeValidatorExt.md
+    - name: ValidationResult
+      href: validation/validationResult.md
+    - name: ValidationResultMessage
+      href: validation/validationResultMessage.md
+- name: iShape.Triangulation.Runtime
+  href: runtime/runtimeApi.md
+  items:
+    - name: PlainShapeCreator
+      href: runtime/plainShapeCreator.md
+    - name: ShapeMeshCreatorExt
+      href: runtime/shapeMeshCreatorExt.md
+    - name: VectorCalculator
+      href: runtime/vectorCalculator.md
