@@ -24,9 +24,9 @@ namespace iShape.Triangulation.Runtime
         }
         
         /// <summary>
-		/// 最初の頂点を(0,0,0)とした相対座標に変更する->メッシュ生成時に最初の頂点をオブジェクトのpositionに設定
+		/// 最初の頂点をoriginとした相対座標に変更する
         /// </summary>
-        /// <param name="hull">hullの頂点群</param>
+        /// <param name="hull">hullの頂点配列</param>
         /// <param name="origin">最初の頂点座標(原点)</param>>
         /// <returns>調整後のhull</returns>
         public static Vector3[] GetAdjustedHull(Vector3[] hull, Vector3 origin)
@@ -35,9 +35,9 @@ namespace iShape.Triangulation.Runtime
         }
         
         /// <summary>
-		/// 最初の頂点を(0,0,0)とした相対座標に変更する->メッシュ生成時に最初の頂点をオブジェクトのpositionに設定
+		/// 最初の頂点をoriginとした相対座標に変更する
         /// </summary>
-        /// <param name="holes">holesの頂点群</param>
+        /// <param name="holes">holesの頂点配列</param>
         /// <param name="origin">最初の頂点座標(原点)</param>>
         /// <returns>調整後のHoles</returns>
         public static Vector3[][] GetAdjustedHoles(Vector3[][] holes, Vector3 origin)
@@ -59,7 +59,7 @@ namespace iShape.Triangulation.Runtime
         }
 
         /// <summary>
-        /// 指定した逆回転行列を適用して頂点群を元の位置に戻す
+        /// 指定した逆回転行列を適用して頂点配列を元の位置に戻す
         /// </summary>
         /// <param name="vertices">回転された頂点配列</param>
         /// <param name="inverseMatrix">適用する逆回転行列</param>
@@ -99,9 +99,9 @@ namespace iShape.Triangulation.Runtime
         }
         
         /// <summary>
-        /// 頂点群の法線ベクトルをVector3.backへ投影するのに必要なQuaternionを取得
+        /// 頂点配列の法線ベクトルをVector3.backへ投影するのに必要なQuaternionを取得
         /// </summary>
-        /// <param name="vertices">頂点群</param>
+        /// <param name="vertices">頂点配列</param>
         /// <returns>回転量(Quaternion)</returns>
         public static Quaternion GetQuaternionFromVertices(Vector3[] vertices)
         {
@@ -111,11 +111,11 @@ namespace iShape.Triangulation.Runtime
         }
 
         /// <summary>
-        /// 指定したQuaternionを適用して頂点群を回転させる
+        /// 指定したQuaternionを適用して頂点配列を回転させる
         /// </summary>
-        /// <param name="vertices">回転対象の頂点群</param>
+        /// <param name="vertices">回転対象の頂点配列</param>
         /// <param name="rotation">Quaternion</param>
-        /// <returns>回転後の頂点群</returns>
+        /// <returns>回転後の頂点配列</returns>
         public static Vector3[] GetRotatedVertices(Vector3[] vertices, Quaternion rotation)
         {
             var rotationMatrix = Matrix4x4.Rotate(rotation);
@@ -123,10 +123,10 @@ namespace iShape.Triangulation.Runtime
         }
         
         /// <summary>
-        /// Vector3の頂点群から法線ベクトルを計算する。
+        /// Vector3の頂点配列から法線ベクトルを計算する
         /// </summary>
-        /// <param name="vertices">対象の頂点群。</param>
-        /// <returns>計算された法線ベクトル。</returns>
+        /// <param name="vertices">対象の頂点配列</param>
+        /// <returns>計算された法線ベクトル</returns>
         private static Vector3 NormalVectorFrom3d(Vector3[] vertices)
         {
             var normal = Vector3.zero;
@@ -142,10 +142,10 @@ namespace iShape.Triangulation.Runtime
         }
 
         /// <summary>
-        /// Vector2の頂点群から法線ベクトルを計算する。
+        /// Vector2の頂点配列から法線ベクトルを計算する
         /// </summary>
-        /// <param name="vertices">対象の頂点群。</param>
-        /// <returns>計算された法線ベクトル。</returns>
+        /// <param name="vertices">対象の頂点配列</param>
+        /// <returns>計算された法線ベクトル</returns>
         public static Vector3 NormalVectorFrom2d(Vector2[] vertices)
         {
             var normal = Vector3.zero;
@@ -161,9 +161,9 @@ namespace iShape.Triangulation.Runtime
         }
         
         /// <summary>
-        /// 2次元同一平面上の頂点群から法線ベクトルを計算する関数
+        /// 2次元同一平面上の頂点配列から法線ベクトルを計算する関数
         /// </summary>
-        /// <param name="shape">2次元同一平面上の頂点群</param>
+        /// <param name="shape">2次元同一平面上の頂点配列</param>
         /// <returns>法線ベクトル(Vector3)</returns>
         public static Vector3 NormalVectorFromShape(PlainShape shape)
         {
