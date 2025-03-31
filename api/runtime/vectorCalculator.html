@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+
+  <head>
+    <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+      <title>Class VectorCalculator | Triangulation </title>
+      <meta name="viewport" content="width=device-width">
+      <meta name="title" content="Class VectorCalculator | Triangulation ">
+    
+    
+      <link rel="shortcut icon" href="../../favicon.ico">
+      <link rel="stylesheet" href="../../styles/docfx.vendor.min.css">
+      <link rel="stylesheet" href="../../styles/docfx.css">
+      <link rel="stylesheet" href="../../styles/main.css">
+      <meta property="docfx:navrel" content="../../toc.html">
+      <meta property="docfx:tocrel" content="../toc.html">
+    
+    <meta property="docfx:rel" content="../../">
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="Triangulation">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div class="container body-content">
+
+        <div id="search-results">
+          <div class="search-list">Search Results for <span></span></div>
+          <div class="sr-items">
+            <p><i class="glyphicon glyphicon-refresh index-loading"></i></p>
+          </div>
+          <ul id="pagination" data-first=First data-prev=Previous data-next=Next data-last=Last></ul>
+        </div>
+      </div>
+      <div role="main" class="container body-content hide-when-search">
+
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="class-vectorcalculator">Class VectorCalculator</h1>
+
+<p>ベクトル計算を行うクラス
+回転行列の適用や法線ベクトルの計算、XY平面投影時に必要な角度の計算などを提供</p>
+<hr>
+<p>Syntax</p>
+<pre><code class="lang-csharp">public static class VectorCalculator
+</code></pre>
+<h3 id="methods">Methods</h3>
+<h4 id="rotatebymatrixvector3-matrix4x4">RotateByMatrix(Vector3, Matrix4x4)</h4>
+<p>指定した回転行列を使用してベクトルを回転</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">private static Vector3 RotateByMatrix(Vector3 vertex, Matrix4x4 rotationMatrix)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3</td>
+<td>vertex</td>
+<td>回転させる3D空間上の頂点座標</td>
+</tr>
+<tr>
+<td>Matrix4x4</td>
+<td>rotationMatrix</td>
+<td>適用する回転行列</td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3</td>
+<td>回転後の頂点座標</td>
+</tr>
+</tbody>
+</table>
+<h4 id="getadjustedhullvector3-vector3">GetAdjustedHull(Vector3[], Vector3)</h4>
+<p>最初の頂点をoriginとした相対座標に変更する(Hull版)</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">public static Vector3[] GetAdjustedHull(Vector3[] hull, Vector3 origin)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3[]</td>
+<td>hull</td>
+<td></td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td>origin</td>
+<td>最初の頂点座標(原点)</td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3[]</td>
+<td>調整後のhull</td>
+</tr>
+</tbody>
+</table>
+<h4 id="getadjustedholesvector3-vector3">GetAdjustedHoles(Vector3[][], Vector3)</h4>
+<p>最初の頂点をoriginとした相対座標に変更する</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">public static Vector3[][] GetAdjustedHoles(Vector3[][] holes, Vector3 origin)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3[][]</td>
+<td>holes</td>
+<td></td>
+</tr>
+<tr>
+<td>Vector3</td>
+<td>origin</td>
+<td>最初の頂点座標(原点)</td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3[][]</td>
+<td>調整後のholes</td>
+</tr>
+</tbody>
+</table>
+<h4 id="getinvertrotationmatrixquaternion">GetInvertRotationMatrix(Quaternion)</h4>
+<p>指定した角度の逆回転行列を取得</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">public static Matrix4x4 GetInvertRotationMatrix(Quaternion rotation)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quaternion</td>
+<td>rotation</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Matrix4x4</td>
+<td>逆回転行列</td>
+</tr>
+</tbody>
+</table>
+<h4 id="getrestoredverticesvector3-matrix4x4">GetRestoredVertices(Vector3[], Matrix4x4)</h4>
+<p>指定した逆回転行列を適用して頂点群を元の位置に戻す</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">public static Vector3[] GetRestoredVertices(Vector3[] vertices, Matrix4x4 inverseMatrix)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3[]</td>
+<td>vertices</td>
+<td>回転された頂点配列</td>
+</tr>
+<tr>
+<td>Matrix4x4</td>
+<td>inverseMatrix</td>
+<td>適用する逆回転行列</td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3</td>
+<td>回転後の頂点座標</td>
+</tr>
+</tbody>
+</table>
+<h4 id="gethullvertices2dvector3">GetHullVertices2d(Vector3[])</h4>
+<p>Vector3の頂点配列からVector2の頂点配列を取得(Hull版)</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">public static Vector2[] GetHullVertices2d(Vector3[] hullVertices)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3[]</td>
+<td>hullVertices</td>
+<td>Vector3の頂点配列</td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector2[]</td>
+<td>Vector2に変換されたhullの頂点配列</td>
+</tr>
+</tbody>
+</table>
+<h4 id="getholesvertices2dvector3">GetHolesVertices2d(Vector3[][])</h4>
+<p>Vector3の頂点配列からVector2の頂点配列を取得(Holes版)</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">public static Vector2[][] GetHolesVertices2d(Vector3[][] holesVertices)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3[][]</td>
+<td>holesVertices</td>
+<td>Vector3の多次元配列</td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector2[][]</td>
+<td>Vector2に変換されたholesの多次元配列</td>
+</tr>
+</tbody>
+</table>
+<h4 id="getquaternionfromverticesvector3">GetQuaternionFromVertices(Vector3[])</h4>
+<p>頂点群の法線ベクトルをVector3.backへ投影するのに必要なQuaternionを取得</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">public static Quaternion GetQuaternionFromVertices(Vector3[] vertices)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3[]</td>
+<td>vertices</td>
+<td>回転対象の頂点配列</td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Quaternion</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h4 id="getrotatedverticesvector3-quaternion">GetRotatedVertices(Vector3[], Quaternion)</h4>
+<p>指定したQuaternionを適用して頂点配列を回転させる</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">public static Vector3[] GetRotatedVertices(Vector3[] vertices, Quaternion rotation)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3</td>
+<td>vertex</td>
+<td>回転対象の頂点配列</td>
+</tr>
+<tr>
+<td>Quaternion</td>
+<td>rotation</td>
+<td>適用する回転行列</td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3</td>
+<td>回転後の頂点配列</td>
+</tr>
+</tbody>
+</table>
+<h4 id="normalvectorfrom3dvector3">NormalVectorFrom3d(Vector3[])</h4>
+<p>Vector3の頂点配列から法線ベクトルを計算する</p>
+<p>Declaration</p>
+<pre><code class="lang-csharp">private static Vector3 NormalVectorFrom3d(Vector3[] vertices)
+</code></pre>
+<p>Parameters</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Name</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3[]</td>
+<td>vertices</td>
+<td>頂点配列</td>
+</tr>
+</tbody>
+</table>
+<p>Returns</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vector3</td>
+<td>法線ベクトル</td>
+</tr>
+</tbody>
+</table>
+
+</article>
+          </div>
+
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                  <li>
+                    <a href="https://github.com/Synesthesias/Triangulation/blob/master/docs/api/runtime/vectorCalculator.md/#L1" class="contribution-link">Edit this page</a>
+                  </li>
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+                <h5>In this article</h5>
+                <div></div>
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+      
+      <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+
+    <script type="text/javascript" src="../../styles/docfx.vendor.min.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,188 @@
+{
+  "source_base_path": "/Users/tanimasatoshi/Documents/UnityProjects/Triangulation/docs",
+  "xrefmap": "xrefmap.yml",
+  "files": [
+    {
+      "type": "Resource",
+      "output": {
+        "resource": {
+          "relative_path": "index.json"
+        }
+      }
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/runtime/plainShapeCreator.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/runtime/plainShapeCreator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/runtime/runtimeApi.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/runtime/runtimeApi.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/runtime/shapeMeshCreatorExt.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/runtime/shapeMeshCreatorExt.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/runtime/vectorCalculator.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/runtime/vectorCalculator.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "api/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "api/toc.html"
+        },
+        ".json": {
+          "relative_path": "api/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/validation/buildDelaunayException.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/validation/buildDelaunayException.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/validation/shapeValidatorExt.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/validation/shapeValidatorExt.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/validation/validationApi.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/validation/validationApi.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/validation/validationResult.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/validation/validationResult.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "api/validation/validationResultMessage.md",
+      "output": {
+        ".html": {
+          "relative_path": "api/validation/validationResultMessage.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Resource",
+      "source_relative_path": "images/cube_sample.png",
+      "output": {
+        "resource": {
+          "relative_path": "images/cube_sample.png"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "index.md",
+      "output": {
+        ".html": {
+          "relative_path": "index.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/debugMan.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/debugMan.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Conceptual",
+      "source_relative_path": "manual/howToUseMan.md",
+      "output": {
+        ".html": {
+          "relative_path": "manual/howToUseMan.html"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "manual/toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "manual/toc.html"
+        },
+        ".json": {
+          "relative_path": "manual/toc.json"
+        }
+      },
+      "version": ""
+    },
+    {
+      "type": "Toc",
+      "source_relative_path": "toc.yml",
+      "output": {
+        ".html": {
+          "relative_path": "toc.html"
+        },
+        ".json": {
+          "relative_path": "toc.json"
+        }
+      },
+      "version": ""
+    }
+  ],
+  "groups": [
+    {
+      "xrefmap": "xrefmap.yml"
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "api/runtime/plainShapeCreator.html": {
+    "href": "api/runtime/plainShapeCreator.html",
+    "title": "Class PlainShapeCreator | Triangulation",
+    "summary": "Class PlainShapeCreator hull(Vector2[])とholes(Vector2[][])からiShape.GeometryのPlainShapeを作成するクラス Syntax public class PlainShapeCreator Methods CreatePlainShape(Vector2[],Vector2[][],IntGeom,Allocator) IShapeをPlainShapeに変換する Declaration public PlainShape CreatePlainShape( Vector2[] hull, Vector2[][] holes, IntGeom iGeom, Allocator allocator) Parameters Type Name Description Vector2[] hull Vector2[][] holes IntGeom iGeom Allocator allocator Returns Type Description PlainShape"
+  },
+  "api/runtime/runtimeApi.html": {
+    "href": "api/runtime/runtimeApi.html",
+    "title": "Namespace iShape.Triangulation.Runtime | Triangulation",
+    "summary": "Namespace iShape.Triangulation.Runtime Classes PlainShapeCreator hull(Vector2[])とholes(Vector2[][])からiShape.GeometryのPlainShapeを作成するクラス ShapeMeshCreatorExt 3次元座標からTriangulationを行い、メッシュを生成するクラス VectorCalculator ベクトル計算を行うクラス 回転行列の適用や法線ベクトルの計算、XY平面投影時に必要な角度の計算などを提供"
+  },
+  "api/runtime/shapeMeshCreatorExt.html": {
+    "href": "api/runtime/shapeMeshCreatorExt.html",
+    "title": "Class ShapeMeshCreatorExt | Triangulation",
+    "summary": "Class ShapeMeshCreatorExt 3次元座標からTriangulationを行い、メッシュを生成するクラス Syntax public class ShapeMeshCreatorExt Methods CreateMesh(Vector3[],Vector3[][]) メッシュを生成する Declaration public Mesh CreateMesh( Vector3[] hull, Vector3[][] holes) Parameters Type Name Description Vector3[] hull Vector3[][] holes Returns Type Description Mesh"
+  },
+  "api/runtime/vectorCalculator.html": {
+    "href": "api/runtime/vectorCalculator.html",
+    "title": "Class VectorCalculator | Triangulation",
+    "summary": "Class VectorCalculator ベクトル計算を行うクラス 回転行列の適用や法線ベクトルの計算、XY平面投影時に必要な角度の計算などを提供 Syntax public static class VectorCalculator Methods RotateByMatrix(Vector3, Matrix4x4) 指定した回転行列を使用してベクトルを回転 Declaration private static Vector3 RotateByMatrix(Vector3 vertex, Matrix4x4 rotationMatrix) Parameters Type Name Description Vector3 vertex 回転させる3D空間上の頂点座標 Matrix4x4 rotationMatrix 適用する回転行列 Returns Type Description Vector3 回転後の頂点座標 GetAdjustedHull(Vector3[], Vector3) 最初の頂点をoriginとした相対座標に変更する(Hull版) Declaration public static Vector3[] GetAdjustedHull(Vector3[] hull, Vector3 origin) Parameters Type Name Description Vector3[] hull Vector3 origin 最初の頂点座標(原点) Returns Type Description Vector3[] 調整後のhull GetAdjustedHoles(Vector3[][], Vector3) 最初の頂点をoriginとした相対座標に変更する Declaration public static Vector3[][] GetAdjustedHoles(Vector3[][] holes, Vector3 origin) Parameters Type Name Description Vector3[][] holes Vector3 origin 最初の頂点座標(原点) Returns Type Description Vector3[][] 調整後のholes GetInvertRotationMatrix(Quaternion) 指定した角度の逆回転行列を取得 Declaration public static Matrix4x4 GetInvertRotationMatrix(Quaternion rotation) Parameters Type Name Description Quaternion rotation Returns Type Description Matrix4x4 逆回転行列 GetRestoredVertices(Vector3[], Matrix4x4) 指定した逆回転行列を適用して頂点群を元の位置に戻す Declaration public static Vector3[] GetRestoredVertices(Vector3[] vertices, Matrix4x4 inverseMatrix) Parameters Type Name Description Vector3[] vertices 回転された頂点配列 Matrix4x4 inverseMatrix 適用する逆回転行列 Returns Type Description Vector3 回転後の頂点座標 GetHullVertices2d(Vector3[]) Vector3の頂点配列からVector2の頂点配列を取得(Hull版) Declaration public static Vector2[] GetHullVertices2d(Vector3[] hullVertices) Parameters Type Name Description Vector3[] hullVertices Vector3の頂点配列 Returns Type Description Vector2[] Vector2に変換されたhullの頂点配列 GetHolesVertices2d(Vector3[][]) Vector3の頂点配列からVector2の頂点配列を取得(Holes版) Declaration public static Vector2[][] GetHolesVertices2d(Vector3[][] holesVertices) Parameters Type Name Description Vector3[][] holesVertices Vector3の多次元配列 Returns Type Description Vector2[][] Vector2に変換されたholesの多次元配列 GetQuaternionFromVertices(Vector3[]) 頂点群の法線ベクトルをVector3.backへ投影するのに必要なQuaternionを取得 Declaration public static Quaternion GetQuaternionFromVertices(Vector3[] vertices) Parameters Type Name Description Vector3[] vertices 回転対象の頂点配列 Returns Type Description Quaternion GetRotatedVertices(Vector3[], Quaternion) 指定したQuaternionを適用して頂点配列を回転させる Declaration public static Vector3[] GetRotatedVertices(Vector3[] vertices, Quaternion rotation) Parameters Type Name Description Vector3 vertex 回転対象の頂点配列 Quaternion rotation 適用する回転行列 Returns Type Description Vector3 回転後の頂点配列 NormalVectorFrom3d(Vector3[]) Vector3の頂点配列から法線ベクトルを計算する Declaration private static Vector3 NormalVectorFrom3d(Vector3[] vertices) Parameters Type Name Description Vector3[] vertices 頂点配列 Returns Type Description Vector3 法線ベクトル"
+  },
+  "api/validation/buildDelaunayException.html": {
+    "href": "api/validation/buildDelaunayException.html",
+    "title": "Class BuildDelaunayException | Triangulation",
+    "summary": "Class BuildDelaunayException ドロネー図作成エラー Syntax public class BuildDelaunayException : Exception Constructors Declaration public BuildDelaunayException(string message) : base($\"ValidationResult:{message}\") Parameters Type Name Description string message"
+  },
+  "api/validation/shapeValidatorExt.html": {
+    "href": "api/validation/shapeValidatorExt.html",
+    "title": "Class ShapeValidatorExt | Triangulation",
+    "summary": "Class ShapeValidatorExt 頂点のバリデーション結果を取得するクラス Syntax public static class ShapeValidatorExt Methods GetValidationResult(PlainShape) 頂点のバリデーションの結果を返す関数 Declaration public static ValidationResult GetValidationResult(PlainShape shape) Parameters Type Name Description PlainShape shape 2次元同一平面上の頂点群 Returns Type Description ValidationResult バリデーションの結果 IsOverlappingVertices(PlainShape) 頂点の重複を検知する関数 Declaration private static bool IsOverlappingVertices(PlainShape shape) Parameters Type Name Description PlainShape shape 2次元同一平面上の頂点群 Returns Type Description bool 頂点が重複しているか IsCounterClockwise(PlainShape) 頂点座標が反時計回りかどうかを判定する関数 Declaration private static bool IsCounterClockwise(PlainShape shape) Parameters Type Name Description PlainShape shape 2次元同一平面上の頂点群 Returns Type Description bool 頂点座標が反時計周りかどうか"
+  },
+  "api/validation/validationApi.html": {
+    "href": "api/validation/validationApi.html",
+    "title": "Namespace iShape.Triangulation.Validation | Triangulation",
+    "summary": "Namespace iShape.Triangulation.Validation Classes BuildDelaunayException ドロネー図作成エラー ShapeValidatorExt 頂点のバリデーション結果を取得するクラス ValidationResult バリデーション結果を表すEnum ValidationResultMessage 指定されたバリデーション結果に対応する説明分を返却するクラス 使用例 // PlainShape shapeからバリデーション結果を取得(Overlap or CounterClockWise or Valid) var validationResult = ShapeValidatorExt.GetValidationResult(shape); if (validationResult != ValidationResult.Valid) { // ドロネー図作成エラー // ValidationResult.Valid以外でドロネー図のビルドを行おうとするとクラッシュする throw new BuildDelaunayException( ValidationResultMessage.GetValidationContext(validationResult)); }"
+  },
+  "api/validation/validationResult.html": {
+    "href": "api/validation/validationResult.html",
+    "title": "Enum ValidationResult | Triangulation",
+    "summary": "Enum ValidationResult バリデーション結果を表すEnum Syntax public enum ValidationResult Fields Name Description None OverLap CounterClockWise Valid"
+  },
+  "api/validation/validationResultMessage.html": {
+    "href": "api/validation/validationResultMessage.html",
+    "title": "Class ValidationResultMessage | Triangulation",
+    "summary": "Class ValidationResultMessage 指定されたバリデーション結果に対応する説明分を返却するクラス Syntax public static class ValidationResultMessage Methods GetValidationContext(ValidationResult) 指定されたバリデーション結果に対応する説明文を取得 Declaration public static string GetValidationContext(ValidationResult result) Parameters Type Name Description ValidationResult result バリデーション結果 Returns Type Description string バリデーション結果に対応する説明文の文字列"
+  },
+  "index.html": {
+    "href": "index.html",
+    "title": "Triangulation | Triangulation",
+    "summary": "Triangulation 元のライブラリに入力データのバリデーションと、３次元頂点への対応を追加した実装です。"
+  },
+  "manual/debugMan.html": {
+    "href": "manual/debugMan.html",
+    "title": "動作確認 | Triangulation",
+    "summary": "動作確認 事前準備 TriangulationDebugをクローンし、Package Managerを開いてiShape.TriangulationをRemove Package ManagerからInstall package from git URL...を選択 https://github.com/Synesthesias/Triangulation.git を入力 Addボタンをクリック ※新規プロジェクトに導入する場合は以下のpackageも同様にインポートする https://github.com/iShapeUnity/Geometry.git https://github.com/iShapeUnity/Mesh2d.git 確認手順 頂点座標が2次元の場合 TessellationScene.csを参照 頂点座標が3次元の場合 空オブジェクトを作成し、MeshFilterとMeshRendererを追加 1.で作成したオブジェクトに以下のスクリプトをアタッチし、このオブジェクトからPrefabを作成する。作成後、ヒエラルキー上にいる1.で作成したオブジェクトを削除する using UnityEngine; /// <summary> /// メッシュのView /// </summary> public class MeshView : MonoBehaviour { [SerializeField] private MeshFilter meshFilter; [SerializeField] private MeshRenderer meshRenderer; /// <summary> /// メッシュのFilter /// </summary> public MeshFilter MeshFilter => meshFilter; /// <summary> /// メッシュのRenderer /// </summary> public MeshRenderer MeshRenderer => meshRenderer; } 再び空オブジェクトを作成し、以下のスクリプトをアタッチ 2.で作成したPrefabをmeshViewTemplateにアタッチして実行 using iShape.Triangulation.Runtime; using UnityEngine; ///<summary> /// Triangulationに渡す構造体 ///</summary> public struct TestShape3d { public Vector3[] Hull; public Vector3[][] Holes; } ///<summary> /// 3次元座標からTriangulationを実行するサンプル ///</summary> public class TestFromVertices3d : MonoBehaviour { [SerializeField] private MeshView meshViewTemplate; private TestShape3d[] data3d = new TestShape3d[] { new TestShape3d { Hull = new Vector3[] { //CW new Vector3(0, 0, 0), new Vector3(-30, 0, 0), new Vector3(-30, 30, 0), new Vector3(0, 30, 0) }, Holes = new Vector3[][] { //CCW new Vector3[] { new Vector3(-10, 20, 0), new Vector3(-20, 20, 0), new Vector3(-20, 10, 0), new Vector3(-10, 10, 0) } } } }; private void Awake() { CreateMeshes(); } /// <summary> /// メッシュを生成する /// </summary> private void CreateMeshes() { for(int index = 0; index < data3d.Length; index++) { var mesh = CreateMesh( hull: data3d[index].Hull, holes: data3d[index].Holes); meshViewTemplate.MeshFilter.mesh = mesh; var meshView = UnityEngine.Object.Instantiate( meshViewTemplate, data3d[index].Hull[0], // 最初の頂点をオブジェクトの原点として設定する Quaternion.identity); } } /// <summary> /// メッシュを生成する /// </summary> private Mesh CreateMesh( Vector3[] hull, Vector3[][] holes) { var shapeMeshCreator = new ShapeMeshCreatorExt(); var mesh = shapeMeshCreator.CreateMesh( hull: hull, holes: holes ); mesh.RecalculateBounds(); mesh.RecalculateNormals(); return mesh; } } Unityシーン上にTessellateの結果が可視化される トラブルシューティング 頂点の重複 頂点群が重複している場合、メッシュを生成することができません 頂点のCW/CCW XY平面上（2次元座標）では頂点の順番が時計回りである必要があります 3次元座標の場合は、メッシュの表裏は変わりますが反時計回りでも問題ありません"
+  },
+  "manual/howToUseMan.html": {
+    "href": "manual/howToUseMan.html",
+    "title": "使い方 | Triangulation",
+    "summary": "使い方 頂点データの編集 TestFromVertices3dのdata3dの中身を変更することで、色々な図形を描画させることができます。 HullとHolesの頂点座標のCW/CCWは以下のどちらかの組み合わせである必要があります。 Hull:CW, Holes:CCW Hull:CCW, Holes:CW HullとHoles共にCWまたはCCWである場合、Holes部分が表示されません。 public class TestFromVertices3d : MonoBehaviour { [SerializeField] private MeshView meshViewTemplate; private CancellationToken cancellationToken; private TestShape3d[] data3d = new TestShape3d[] { new TestShape3d { Hull = new Vector3[] { //CW new Vector3(0, 0, 0), new Vector3(-30, 0, 0), new Vector3(-30, 30, 0), new Vector3(0, 30, 0) }, Holes = new Vector3[][] { //CCW new Vector3[] { new Vector3(-10, 20, 0), new Vector3(-20, 20, 0), new Vector3(-20, 10, 0), new Vector3(-10, 10, 0) } } } }; /*以下略 -> 動作確認に記載されているTestFromVertices3d.cs参照*/ } 追加した機能 APIに記載 データサンプル Cube private TestShape3d[] data3d = new TestShape3d[] { new TestShape3d { Hull = new Vector3[] { //CCW new Vector3(0, 0, 0), new Vector3(0, 0, 30), new Vector3(-30, 0, 30), new Vector3(-30, 0, 0) } }, new TestShape3d { Hull = new Vector3[] { //CW new Vector3(0, 0, 0), new Vector3(-30, 0, 0), new Vector3(-30, 30, 0), new Vector3(0, 30, 0) } }, new TestShape3d { Hull = new Vector3[] { //CW new Vector3(0, 0, 0), new Vector3(0, 30, 0), new Vector3(0, 30, 30), new Vector3(0, 0, 30) } }, new TestShape3d { Hull = new Vector3[] { //CCW new Vector3(-30, 0, 0), new Vector3(-30, 0, 30), new Vector3(-30, 30, 30), new Vector3(-30, 30, 0) } }, new TestShape3d { Hull = new Vector3[] { //CCW new Vector3(0, 0, 30), new Vector3(0, 30, 30), new Vector3(-30, 30, 30), new Vector3(-30, 0, 30) } }, new TestShape3d { Hull = new Vector3[] { //CW new Vector3(0, 30, 0), new Vector3(-30, 30, 0), new Vector3(-30, 30, 30), new Vector3(0, 30, 30) } } };"
+  }
+}
