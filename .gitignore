@@ -37,3 +37,4 @@ sysinfo.txt
 
 # docfx _site
 docs/_site
+**/.claude/settings.local.json
